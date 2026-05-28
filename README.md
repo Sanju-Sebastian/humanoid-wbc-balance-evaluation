@@ -55,8 +55,7 @@ stability across all four base controllers.
 ## Repository Structure
 
 ```text
-scripts/
-│
+
 ├── controllers/
 │   ├── wbc_weighted_qp_experiment_final_v2.py   # Weighted QP controller
 │   ├── wbc_hierarchial_qp_experiment_final.py   # Hierarchical QP controller
