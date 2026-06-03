@@ -1,5 +1,5 @@
 """
-Residual MLP for passivity-based WBC correction.  v2 — CoM-augmented input.
+Residual MLP for passivity-based WBC correction.  v3 — CoM-augmented input.
 
 KEY CHANGE vs v1:
   INPUT_DIM 42 → 46.  Four new features appended to state vector:
@@ -296,7 +296,7 @@ class PassivityEngine:
         tau_wbc = tau_g + tau_pd + tau_d + tau_e
         return tau_wbc, hipr_int_new
 
-    # ── State vector builder — v2: 42 → 46 dims ───────────────────────────────
+    # ── State vector builder — v3: 42 → 46 dims ───────────────────────────────
 
     def _build_state_vec(
         self,
@@ -867,7 +867,7 @@ def run_train(args: argparse.Namespace) -> None:
         "tau_bound":        TAU_BOUND,
         "output_joints":    OUTPUT_JOINT_NAMES,
         "best_val_loss":    best_val_loss,
-        "version":          "v2_com_augmented",
+        "version":          "v3_com_augmented",
         "feature_names":    FEATURE_NAMES,
     }, weights_path)
 
@@ -895,7 +895,8 @@ def run_evaluate(args: argparse.Namespace) -> None:
         raise FileNotFoundError(f"Weights not found: {weights_path}\nRun --mode train first.")
 
     print("=" * 60)
-    print("EVALUATE MODE  (v2 — 46-dim input)")
+
+    print("EVALUATE MODE  (v3 — 46-dim input)")
     print(f"Weights : {weights_path}")
     print(f"Seeds   : 0 – {args.n_eval_seeds - 1}  ({args.n_eval_seeds} trials)")
     print("=" * 60)
@@ -999,7 +1000,7 @@ def run_evaluate(args: argparse.Namespace) -> None:
     mean_rms    = float(np.mean([r["rms_com_disp_m"]  for r in all_results]))
 
     print("\n" + "=" * 60)
-    print("EVALUATE COMPLETE  (v2)")
+    print("EVALUATE COMPLETE  (v3)")
     print(f"  Stable          : {n_stable}/{n}  ({100*n_stable/n:.1f}%)")
     print(f"  Passivity base  : 110/200 (55.0%)  ← compare against this")
     print(f"  Fell            : {fall_count}/{n}")
@@ -1015,7 +1016,8 @@ def run_evaluate(args: argparse.Namespace) -> None:
 # =============================================================================
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Residual MLP v2 — CoM-augmented input")
+
+    p = argparse.ArgumentParser(description="Residual MLP v3 — CoM-augmented input")
 
     p.add_argument("--mode", type=str, required=True,
                    choices=["collect", "train", "evaluate"])
