@@ -55,7 +55,6 @@ stability across all four base controllers.
 ## Repository Structure
 
 ```text
-
 ├── controllers/
 │   ├── wbc_weighted_qp_experiment_final_v2.py   # Weighted QP controller
 │   ├── wbc_hierarchial_qp_experiment_final.py   # Hierarchical QP controller
@@ -68,7 +67,7 @@ stability across all four base controllers.
 │
 ├── residual_mlp/
 │   ├── residual_mlp.py         # MLP v1 — LIPM prediction loss (null result)
-│   ├── residual_mlp_v2.py      # MLP v3 — passivity base controller
+│   ├── residual_mlp_v3.py      # MLP v3 — passivity base controller
 │   ├── residual_mlp_lqr.py     # MLP v3 — LQR base controller
 │   ├── residual_mlp_wqp.py     # MLP v3 — WQP base controller
 │   ├── residual_mlp_hqp.py     # MLP v3 — HQP base controller
@@ -78,9 +77,25 @@ stability across all four base controllers.
 │   ├── analysis.py             # Part 1a — deterministic grid analysis
 │   └── analysis_part1b.py      # Part 1b — stochastic batch analysis + all figures
 │
-└── tests/
-    └── hqp_divergence_test.py  # Verifies HQP priority structure is active and correct
+├── tests/
+│   └── hqp_divergence_test.py  # Verifies HQP priority structure is active and correct
+│
+├── docs/
+│   ├── thesis_report.pdf       # Full thesis report
+│   └── thesis_presentation.pdf # Public defence presentation slides
+│
+├── requirements.txt            # Python dependencies
+└── .gitignore                  # Python gitignore
 ```
+
+---
+
+## Thesis Documents
+
+| Document | Description |
+|---|---|
+| [Thesis Report](docs/thesis_report.pdf) | Full master's thesis (methodology, results, analysis) |
+| [Presentation Slides](docs/thesis_presentation.pdf) | Public defence slides (June 2026) |
 
 ---
 
@@ -128,7 +143,7 @@ venv\Scripts\activate        # Windows
 # source venv/bin/activate   # Linux/Mac
 
 # Install dependencies
-pip install mujoco numpy torch scipy pandas cvxpy osqp
+pip install -r requirements.txt
 ```
 
 ---
@@ -147,7 +162,7 @@ To run the MLP-augmented controller, ensure the trained model weights are presen
 in `residual_mlp/` and run:
 
 ```bash
-python residual_mlp/residual_mlp_v2.py
+python residual_mlp/residual_mlp_v3.py
 ```
 
 ---
@@ -160,9 +175,9 @@ Python · MuJoCo · PyTorch · CVXPY · OSQP · NumPy · SciPy · Pandas
 
 ## Citation
 
-If you use this work, please cite:
-Sanju N Sebastian, "Evaluation of Whole-Body Control Architectures for Humanoid
-Balance in Simulation with Learning-Based Residual Compensation,"
+If you use this work, please cite:  
+Sanju N Sebastian, "Evaluation of Whole-Body Control Architectures for Humanoid  
+Balance in Simulation with Learning-Based Residual Compensation,"  
 Master's Thesis, University West, Sweden, 2026.
 
 ---
