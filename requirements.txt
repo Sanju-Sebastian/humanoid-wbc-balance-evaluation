@@ -1,0 +1,7 @@
+mujoco
+numpy
+torch
+scipy
+pandas
+cvxpy
+osqp
